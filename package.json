@@ -1,0 +1,14 @@
+{
+  "name": "MowItNow",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "Jerome Bueno",
+  "scripts": {
+    "dev": "node index.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
+  }
+}
