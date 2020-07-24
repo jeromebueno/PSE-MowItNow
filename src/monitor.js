@@ -1,5 +1,6 @@
 const Lawn = require('./lawn')
 const Mower = require ('./mower')
+const Position = require ('./utils/position')
 
 class Monitor {
     static async perfomMowing(instruction){
@@ -14,7 +15,7 @@ class Monitor {
             let route = instruction[i+1]
 
             if(lawn.isIn(initialPosition)){
-                await this.mow(lawn,initialPosition,orientation,route)
+                console.log(await this.mow(lawn,initialPosition,orientation,route))
             }else{
                 throw new Error('La position de la tondeuse est en dehors de la pelouse')
             }
@@ -24,14 +25,13 @@ class Monitor {
     static mow(lawn,initialPosition,orientation,route){
         let mower = new Mower(initialPosition,orientation)
         for(let movement of route){
-            let previousPosition = {...mower.position}
+            let previousPosition = new Position(mower.position.x,mower.position.y)
             mower.move(movement)
             if(movement == "A" && !lawn.isIn(mower.position)){
-                mower.position = {...previousPosition}
+                mower.position = previousPosition
             }
         }
-        console.log(`${mower.position.x} ${mower.position.y} ${mower.orientation.code}`)
-        return Promise.resolve(true)
+        return `${mower.position.x} ${mower.position.y} ${mower.orientation.code}`
     }
 }
 

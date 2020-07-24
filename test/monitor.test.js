@@ -39,11 +39,8 @@ test('throw error if mower outside lawn', async() => {
 });
 
 test('test if get same position if mow outside position', async() => {
-  const consoleSpy = jest.spyOn(console, 'log');
-
   const lawn = new Lawn(5,5)
-  await Monitor.mow(lawn,{x:5,y:5},"N","A")
   
-  expect(consoleSpy).toHaveBeenCalledWith('5 5 N');
+  expect(Monitor.mow(lawn,{x:5,y:5},"N","A")).toBe('5 5 N');
 });
 
