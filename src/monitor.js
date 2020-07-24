@@ -1,6 +1,7 @@
 const Lawn = require('./lawn')
 const Mower = require ('./mower')
 const Position = require ('./utils/position')
+const {ADVANCE } = require('./utils/constants')
 
 class Monitor {
     static async perfomMowing(instruction){
@@ -27,7 +28,7 @@ class Monitor {
         for(let movement of route){
             let previousPosition = new Position(mower.position.x,mower.position.y)
             mower.move(movement)
-            if(movement == "A" && !lawn.isIn(mower.position)){
+            if(movement === ADVANCE && !lawn.isIn(mower.position)){
                 mower.position = previousPosition
             }
         }
